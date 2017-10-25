@@ -32,12 +32,12 @@ static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const unsigned int MAX_INV_SZ = 50000;
 static const int64 MIN_TX_FEE = 5 * CENT;
 static const int64 MIN_RELAY_TX_FEE = 5 * CENT;
-static const int64 MAX_MONEY = 8000000 * COIN;	// 8m
+static const int64 MAX_MONEY = 10000000 * COIN;	// 8m
 static const int64 INITSUPPLY = 7777777 * COIN; // 7.7m
 static const int64 NORMALIZE = 0.1 * COIN; // Making sure the reward is low while the difficulty is normalizing during the launch phase
 static const double TAX_PERCENTAGE = 0.01;
 static const int64 MAX_MINT_PROOF_OF_STAKE = 0.1 * COIN;	// 10% annual interest
-static const int CUTOFF_POW_BLOCK = 21600; // 20 days
+static const int CUTOFF_POW_BLOCK = 1000000; // 20 days
 
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 
