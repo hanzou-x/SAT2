@@ -85,6 +85,8 @@ contains(BITCOIN_NEED_QT_PLUGINS, 1) {
     QTPLUGIN += qcncodecs qjpcodecs qtwcodecs qkrcodecs qtaccessiblewidgets
 }
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 
 # regenerate src/build.h
 !windows|contains(USE_BUILD_INFO, 1) {
