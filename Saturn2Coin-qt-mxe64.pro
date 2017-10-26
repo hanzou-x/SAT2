@@ -100,7 +100,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
     DEFINES += HAVE_BUILD_INFO
 }
 
-QMAKE_CXXFLAGS += -msse2
+QMAKE_CXXFLAGS += -msse2 -std=c++11
 QMAKE_CFLAGS += -msse2
 QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wformat -Wformat-security -Wno-unused-parameter -Wstack-protector
 
