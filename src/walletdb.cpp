@@ -3,11 +3,10 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#define BOOST_NO_CXX11_SCOPED_ENUMS
 #include "walletdb.h"
 #include "wallet.h"
-#define BOOST_NO_CXX11_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
-#undef BOOST_NO_CXX11_SCOPED_ENUMS
 
 using namespace std;
 using namespace boost;
