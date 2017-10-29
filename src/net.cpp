@@ -1895,7 +1895,7 @@ void StartNode(void* parg)
     if (!NewThread(ThreadDumpAddress, NULL))
         printf("Error; NewThread(ThreadDumpAddress) failed\n");
 
-    if (GetBoolArg("-stakepos", false)) {
+    if (GetBoolArg("-stakepos", true)) {
         // ppcoin: mint proof-of-stake blocks in the background
         if (!NewThread(ThreadStakeMinter, pwalletMain))
             printf("Error: NewThread(ThreadStakeMinter) failed\n");
