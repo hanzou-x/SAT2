@@ -952,14 +952,22 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
 		nSubsidy = NORMALIZE;
 		return nSubsidy;
 	}
-	else if(nHeight > CUTOFF_POW_BLOCK)
+	else if(nHeight > CUTOFF_POW_BLOCK && nHeight <= 555386)
 	{
 		return nMinSubsidy + nFees;
 	}
 
-	// Subsidy is cut in half every week or 20160 blocks, which will occur approximately every month
+	// Subsidy is cut in half every week or 20160 blocks, which will occur
+        // approximately every month
 	nSubsidy >>= (nHeight / 7560); 
-    return nSubsidy + nFees;
+
+	// We want to restart POW.
+	if (nHeight > 555386) 
+	{
+		nSubsidy = 77 * CENT;
+	}
+
+	return nSubsidy + nFees;
 }
 
 // miner's coin stake reward based on nBits and coin age spent (coin-days)
