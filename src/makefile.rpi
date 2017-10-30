@@ -8,6 +8,8 @@ OPENSSL_LIB_PATH := /opt/x-tools/pi-openssl/lib
 OPENSSL_INCLUDE_PATH := /opt/x-tools/pi-openssl/include
 BDB_LIB_PATH := /opt/x-tools/pi-db/lib
 BDB_INCLUDE_PATH := /opt/x-tools/pi-db/include
+UPNP_LIB_PATH := /opt/x-tools/pi-upnpc/lib
+UPNP_INCLUDE_PATH := /opt/x-tools/pi-upnpc/include
 CXX_LIB_PATH := /opt/x-tools/pi-crosstool-ng/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/lib
 CXX_INCLUDE_PATH := /opt/x-tools/pi-crosstool-ng/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/include
 ZLIB_LIB_PATH := /opt/x-tools/pi-zlib/lib
@@ -16,7 +18,7 @@ CROSS := arm-unknown-linux-gnueabi
 
 CXX := ${CROSS}-g++
 
-USE_UPNP:=-
+USE_UPNP:=0
 USE_IPV6:=1
 
 LINK:=$(CXX)
@@ -54,8 +56,8 @@ ifndef USE_UPNP
 	override USE_UPNP = -
 endif
 ifneq (${USE_UPNP}, -)
-	LIBS += -l miniupnpc
-	DEFS += -DUSE_UPNP=$(USE_UPNP)
+	LIBS += -L$(UPNP_LIB_PATH) -l miniupnpc
+	DEFS += -DUSE_UPNP=$(USE_UPNP) -I$(UPNP_INCLUDE_PATH)
 endif
 
 ifneq (${USE_IPV6}, -)
@@ -146,7 +148,8 @@ OBJS= \
     obj/pbkdf2.o \
     obj/scrypt_mine.o \
     obj/scrypt-x86.o \
-    obj/scrypt-x86_64.o
+    obj/scrypt-x86_64.o \
+    obj/scrypt-arm.o
 
 
 all: Saturn2Coind
@@ -167,6 +170,9 @@ obj/scrypt-x86.o: scrypt-x86.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
 
 obj/scrypt-x86_64.o: scrypt-x86_64.S
+	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
+
+obj/scrypt-arm.o: scrypt-arm.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
 
 obj/%.o: %.cpp
