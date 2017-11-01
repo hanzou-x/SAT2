@@ -25,7 +25,7 @@
 using namespace std;
 using namespace boost;
 
-static const int MAX_OUTBOUND_CONNECTIONS = 12;
+static const int MAX_OUTBOUND_CONNECTIONS = 32;
 
 void ThreadMessageHandler2(void* parg);
 void ThreadSocketHandler2(void* parg);
@@ -1154,10 +1154,8 @@ void MapPort()
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strDNSSeed[][2] = {
-      {"US-West", "165.227.51.119"},
-      {"US-East", "45.55.142.171"},
-      {"UK", "138.68.136.38"},
-      {"CAN", "138.197.168.162"},
+      {"seed", "seed.saturn2coin.mycryptocoins.net"},
+      {"seednodes", "seednodes.saturn2coin.mycryptocoins.net"},
     {NULL, NULL}
 };
 
@@ -1895,11 +1893,11 @@ void StartNode(void* parg)
     if (!NewThread(ThreadDumpAddress, NULL))
         printf("Error; NewThread(ThreadDumpAddress) failed\n");
 
-#if 0
-    // ppcoin: mint proof-of-stake blocks in the background
-    if (!NewThread(ThreadStakeMinter, pwalletMain))
-        printf("Error: NewThread(ThreadStakeMinter) failed\n");
-#endif
+    if (GetBoolArg("-stakepos", true)) {
+        // ppcoin: mint proof-of-stake blocks in the background
+        if (!NewThread(ThreadStakeMinter, pwalletMain))
+            printf("Error: NewThread(ThreadStakeMinter) failed\n");
+    }
 
     // Generate coins in the background
     GenerateBitcoins(GetBoolArg("-gen", false), pwalletMain);
