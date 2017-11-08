@@ -37,7 +37,7 @@ static const int64 INITSUPPLY = 7777777 * COIN; // 7.7m
 static const int64 NORMALIZE = 0.1 * COIN; // Making sure the reward is low while the difficulty is normalizing during the launch phase
 static const double TAX_PERCENTAGE = 0.01;
 static const int64 MAX_MINT_PROOF_OF_STAKE = 0.1 * COIN;	// 10% annual interest
-static const int CUTOFF_POW_BLOCK = 1000000; // 20 days
+static const int CUTOFF_POW_BLOCK = 570000; // 20 days
 
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 
